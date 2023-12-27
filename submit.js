@@ -10,14 +10,17 @@ const findSum = function(array) {
 const findFrequency = function(array) {
     let count = {};
     for (let i = 0; i < array.length; i++) {
-        let letter = array[i];
-        if (count[letter]){
-            count[letter] += 1;
+        let str = array[i];
+        if (count[str]){
+            count[str] += 1;
         } else {
-            count[letter] = 1;
+            count[str] = 1;
         }
     }
-  };
+    let mostFrequentKey = Object.keys(count).reduce((acc, key) => count[key] > count[acc] ? key : acc);
+    let leastFrequentKey = Object.keys(count).reduce((acc, key) => count[key] < count[acc] ? key : acc);
+    return { most: mostFrequentKey, least: leastFrequentKey};
+    };
 
 
 const isPalindrome = function(str) {
@@ -46,9 +49,10 @@ const largestPair = function(array) {
 
 
 const removeParenth = function(str) {
-   cleanString = str.replace("(", "");
-   cleanString = cleanString.replace(")", "");
-   return cleanString;
+   let firstParenIndex = str.indexOf('(');
+   let lastParenIndex = str.indexOf(')');
+   let newString = str.substring(0, firstParenIndex) + str.substring(lastParenIndex + 1);
+   return newString;
   };
 
 const scoreScrabble = function(str) {
